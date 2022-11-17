@@ -2,8 +2,15 @@ import NotificationBtn from '../NotificationBtn';
 import './styles.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useState } from 'react';
 
 const SalesCard = () => {
+  const yearAgo = new Date(new Date().setDate(new Date().getDate() - 365));
+  const today = new Date();
+
+  const [minDate, setMinDate] = useState(yearAgo);
+  const [maxDate, setMaxDate] = useState(today);
+
   return (
     <>
       <div>
@@ -12,16 +19,20 @@ const SalesCard = () => {
           <div>
             <div className="dsmeta-form-control-container">
               <DatePicker
-                selected={new Date()}
-                onChange={(date: Date) => {}}
+                selected={minDate}
+                onChange={(date: Date) => {
+                  setMinDate(date);
+                }}
                 className="dsmeta-form-control"
                 dateFormat="dd/MM/yyy"
               />
             </div>
             <div className="dsmeta-form-control-container">
               <DatePicker
-                selected={new Date()}
-                onChange={(date: Date) => {}}
+                selected={maxDate}
+                onChange={(date: Date) => {
+                  setMaxDate(date);
+                }}
                 className="dsmeta-form-control"
                 dateFormat="dd/MM/yyy"
               />
