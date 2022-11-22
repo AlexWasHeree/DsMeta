@@ -2,7 +2,8 @@ import NotificationBtn from '../NotificationBtn';
 import './styles.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const SalesCard = () => {
   const yearAgo = new Date(new Date().setDate(new Date().getDate() - 365));
@@ -10,6 +11,12 @@ const SalesCard = () => {
 
   const [minDate, setMinDate] = useState(yearAgo);
   const [maxDate, setMaxDate] = useState(today);
+
+  useEffect(() => {}, [
+    axios.get('http://localhost:8080/sales').then((response) => {
+      console.log(response.data);
+    }),
+  ]);
 
   return (
     <>
